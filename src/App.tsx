@@ -114,7 +114,7 @@ export default function App() {
     setTimeout(() => setStep(to), 50);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (!a.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(a.email)) {
       alert('Email is required so we can show you your Giant!');
       return;
@@ -131,26 +131,19 @@ export default function App() {
       _timestamp: new Date().toISOString(),
     };
 
-    // Add to local state immediately
+    // Add to local state and show thanks immediately
     setSubmissions(prev => [...prev, submission]);
-    setSubmitStatus('sending');
-
-    // Send to API
-    try {
-      const res = await fetch('/api/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(submission),
-      });
-      if (!res.ok) {
-        console.error('Submit API error:', await res.text());
-      }
-    } catch (err) {
-      console.error('Submit failed (submission saved locally):', err);
-    }
-
     setSubmitStatus('sent');
-    setTimeout(() => setStep('thanks'), 150);
+    setStep('thanks');
+
+    // Fire-and-forget: send to API in background, don't block the UX
+    fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(submission),
+    }).catch((err) => {
+      console.error('Submit failed (submission saved locally):', err);
+    });
   };
 
   const handleAddAnother = () => {
