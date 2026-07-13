@@ -39,6 +39,7 @@ export default function App() {
   const [ans, setAns] = useState<Answers>(empty);
   const [items, setItems] = useState<Submission[]>([]);
   const [busy, setBusy] = useState(false);
+  const [lightbox, setLightbox] = useState(false);
   const nextId = React.useRef(1);
 
   const upd = (k: keyof Answers, v: any) => setAns(p => ({ ...p, [k]: v }));
@@ -78,6 +79,27 @@ export default function App() {
   if (step === 'welcome') {
     return (
       <div className="min-h-screen bg-[#F4F4F4] flex items-center justify-center px-5 py-12">
+        {/* Lightbox overlay */}
+        {lightbox && (
+          <div
+            className="fixed inset-0 z-[100] bg-black/70 flex items-center justify-center p-4"
+            onClick={() => setLightbox(false)}
+          >
+            <div className="relative max-w-[90vw] max-h-[90vh]" onClick={e => e.stopPropagation()}>
+              <img
+                src="/donation-examples.jpg"
+                alt="Auction finds examples"
+                className="w-full h-auto max-h-[85vh] rounded-2xl shadow-2xl"
+              />
+              <button
+                onClick={() => setLightbox(false)}
+                className="absolute -top-3 -right-3 w-8 h-8 bg-black text-[#F4F4F4] rounded-full flex items-center justify-center font-['DM_Sans'] font-bold text-sm hover:bg-black/80 transition-all shadow-lg"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        )}
         <Fade id="welcome">
           <div className="text-center">
             <div className="w-14 h-14 bg-black rounded-xl flex items-center justify-center mx-auto mb-8">
@@ -86,16 +108,19 @@ export default function App() {
             <h1 className="font-['Playfair_Display'] italic font-semibold text-5xl md:text-6xl text-black leading-[1.1] mb-6">Meet Your Giant</h1>
             <p className="text-black/70 text-sm mb-6 max-w-md mx-auto">We're building a Giant. A personal AI assistant, big enough to carry the boring, the frustrating, the distracting, and the &ldquo;can you just quickly&mdash;&rdquo; parts of your job.</p>
 
-            {/* Donation examples image */}
-            <div className="mb-6 max-w-md mx-auto">
-              <img
-                src="/donation-examples.jpg"
-                alt="Examples of items you can donate — boring tasks, frustrations, distractions, and more"
-                className="w-full rounded-xl border border-black/10"
-                loading="lazy"
-              />
-              <p className="text-[10px] text-black/30 mt-1.5 text-center font-['DM_Sans']">
-                Example auction items — donate the tasks you'd rather not do
+            {/* Auction Finds section */}
+            <div className="mb-6 max-w-md mx-auto text-center">
+              <h3 className="font-['Playfair_Display'] italic font-semibold text-lg text-black/40 mb-3">Auction Finds</h3>
+              <button onClick={() => setLightbox(true)} className="group cursor-pointer">
+                <img
+                  src="/donation-examples.jpg"
+                  alt="Examples of items you can donate"
+                  className="w-1/2 mx-auto rounded-xl border border-black/10 group-hover:opacity-80 transition-opacity shadow-[0_2px_12px_rgba(0,0,0,0.06)]"
+                  loading="lazy"
+                />
+              </button>
+              <p className="text-[10px] text-black/30 mt-1.5 font-['DM_Sans']">
+                Tap to enlarge
               </p>
             </div>
 
