@@ -1,24 +1,52 @@
 @import "tailwindcss";
 
-/* GIANT Agency Brand Colors */
 :root {
-  --brand-pink: #ffaebc;
-  --brand-pink-light: #ffe5ea;
-  --brand-dark: #1a1a1a;
-  --brand-gray: #6b6b6b;
-  --brand-light: #f5f5f5;
-  --brand-white: #ffffff;
+  --off-white: #F4F4F4;
+  --black: #0a0a0a;
+  --dark: #1a1a1a;
+  --gray: #666;
+  --light-gray: #e0e0e0;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background-color: var(--brand-light);
-  color: var(--brand-dark);
   margin: 0;
   padding: 0;
+  background: var(--off-white);
+  color: var(--black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth scroll */
 html {
   scroll-behavior: smooth;
+}
+
+/* Font loading */
+.dm-sans {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+}
+
+.playfair {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* Selection */
+::selection {
+  background: var(--black);
+  color: var(--off-white);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--light-gray);
+  border-radius: 2px;
 }
