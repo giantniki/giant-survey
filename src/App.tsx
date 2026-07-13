@@ -84,7 +84,21 @@ export default function App() {
               <span className="text-[#F4F4F4] text-2xl font-['DM_Sans'] font-bold">G</span>
             </div>
             <h1 className="font-['Playfair_Display'] italic font-semibold text-5xl md:text-6xl text-black leading-[1.1] mb-6">Meet Your Giant</h1>
-            <p className="text-black/70 text-sm mb-10 max-w-md mx-auto">We're building a Giant. A personal AI assistant, big enough to carry the boring, the frustrating, the distracting, and the &ldquo;can you just quickly&mdash;&rdquo; parts of your job.</p>
+            <p className="text-black/70 text-sm mb-6 max-w-md mx-auto">We're building a Giant. A personal AI assistant, big enough to carry the boring, the frustrating, the distracting, and the &ldquo;can you just quickly&mdash;&rdquo; parts of your job.</p>
+
+            {/* Donation examples image */}
+            <div className="mb-6 max-w-md mx-auto">
+              <img
+                src="/donation-examples.jpg"
+                alt="Examples of items you can donate — boring tasks, frustrations, distractions, and more"
+                className="w-full rounded-xl border border-black/10"
+                loading="lazy"
+              />
+              <p className="text-[10px] text-black/30 mt-1.5 text-center font-['DM_Sans']">
+                Example auction items — donate the tasks you'd rather not do
+              </p>
+            </div>
+
             <div className="flex flex-col items-center gap-3">
               <button onClick={() => nav('q1')}
                 className="font-['DM_Sans'] font-bold text-lg text-white bg-black px-12 py-4 rounded-xl hover:bg-black/80 transition-all active:scale-[0.97]">
