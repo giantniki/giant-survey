@@ -123,7 +123,6 @@ export default function App() {
       alert('Thanks! You\'ve reached the maximum of 10 items. We\'ve got plenty to work with.');
       return;
     }
-    if (submitStatus === 'sending') return;
 
     const submission: Submission = {
       ...a,
@@ -131,12 +130,13 @@ export default function App() {
       _timestamp: new Date().toISOString(),
     };
 
-    // Add to local state and show thanks immediately
     setSubmissions(prev => [...prev, submission]);
     setSubmitStatus('sent');
+
+    // Navigate directly — don't use go() which has a setTimeout
     setStep('thanks');
 
-    // Fire-and-forget: send to API in background, don't block the UX
+    // Fire-and-forget to API
     fetch('/api/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
